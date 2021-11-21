@@ -5,6 +5,7 @@
         <groupId>com.ysb.gp</groupId>
         <artifactId>ysb-gp-spring-boot</artifactId>
         <version>${revision}</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>com.ysb.gp</groupId>
