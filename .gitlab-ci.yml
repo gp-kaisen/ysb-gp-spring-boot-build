@@ -1,5 +1,4 @@
-
 include:
   - project: "deployment/ci-templates"
     ref: master
-    file: "maven-java-project-default-template.yml"
+    file: "maven-package-project-default-template.yml"
