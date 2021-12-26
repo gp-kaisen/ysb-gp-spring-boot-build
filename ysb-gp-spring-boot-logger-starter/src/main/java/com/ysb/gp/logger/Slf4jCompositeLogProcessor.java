@@ -18,7 +18,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 使用Slf4j规范记录用户请求日志 覆盖平台CompositeLogProcessor，使用Slf4j方式输出日志，移除对brave.Tracer依赖
+ * 使用Slf4j规范记录用户请求日志，用于覆盖平台{@link CompositeLogProcessor}，使用Slf4j方式输出日志，移除对{@link brave.Tracer}依赖
  */
 @Slf4j
 public class Slf4jCompositeLogProcessor extends CompositeLogProcessor {
@@ -49,10 +49,10 @@ public class Slf4jCompositeLogProcessor extends CompositeLogProcessor {
     }
 
     /**
-     * 将原用户操作日志对象转换@UserOpLogJsonModel，便于Json序列化写入的日志对象
+     * 将原用户操作日志对象转换{@link UserOpLogJsonModel}，便于Json序列化写入的日志对象
      * 
      * @param userOpLog 用户操作日志对象
-     * @return @UserOpLogJsonModel
+     * @return {@link UserOpLogJsonModel}
      * @throws JsonProcessingException
      */
     private UserOpLogJsonModel convert(UserOpLog<JsonResultLogOps> userOpLog) throws JsonProcessingException {
