@@ -24,19 +24,53 @@
         <revision>2.3.5-SNAPSHOT</revision>
 
         <!-- 第三方依赖项版本 -->
+        <ysb-spring-boot.version>2.3.5</ysb-spring-boot.version>
         <xxl-job-core.version>2.3.0</xxl-job-core.version>
+        <brave.version>5.13.2</brave.version>
     </properties>
 
     <modules>
         <module>ysb-gp-spring-boot-xxl-job-starter</module>
+        <module>ysb-gp-spring-boot-logger-starter</module>
+        <module>ysb-gp-spring-boot-web-starter</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>com.ysb.gp</groupId>
+                <artifactId>ysb-gp-spring-boot-logger-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ysb.gp</groupId>
+                <artifactId>ysb-gp-spring-boot-xxl-job-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ysb.gp</groupId>
+                <artifactId>ysb-gp-spring-boot-web-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!-- ysb相关依赖 -->
+            <dependency>
+                <groupId>com.ysb</groupId>
+                <artifactId>ysb-spring-boot-web-starter</artifactId>
+                <version>${ysb-spring-boot.version}</version>
+            </dependency>
+
+            <!-- 第三方依赖-->
+            <dependency>
                 <groupId>com.xuxueli</groupId>
                 <artifactId>xxl-job-core</artifactId>
                 <version>${xxl-job-core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.zipkin.brave</groupId>
+                <artifactId>brave</artifactId>
+                <version>${brave.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
