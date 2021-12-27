@@ -27,12 +27,15 @@
         <ysb-spring-boot.version>2.3.5</ysb-spring-boot.version>
         <xxl-job-core.version>2.3.0</xxl-job-core.version>
         <brave.version>5.13.2</brave.version>
+        <log4j-layout-template-json.version>2.14.1</log4j-layout-template-json.version>
+        <skywalking.version>8.7.0</skywalking.version>
     </properties>
 
     <modules>
         <module>ysb-gp-spring-boot-xxl-job-starter</module>
         <module>ysb-gp-spring-boot-logger-starter</module>
         <module>ysb-gp-spring-boot-web-starter</module>
+        <module>ysb-gp-spring-boot-skywalking-starter</module>
     </modules>
 
     <dependencyManagement>
@@ -50,6 +53,11 @@
             <dependency>
                 <groupId>com.ysb.gp</groupId>
                 <artifactId>ysb-gp-spring-boot-web-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ysb.gp</groupId>
+                <artifactId>ysb-gp-spring-boot-skywalking-starter</artifactId>
                 <version>${revision}</version>
             </dependency>
 
@@ -71,6 +79,23 @@
                 <groupId>io.zipkin.brave</groupId>
                 <artifactId>brave</artifactId>
                 <version>${brave.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-layout-template-json</artifactId>
+                <version>${log4j-layout-template-json.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.skywalking</groupId>
+                <artifactId>apm-toolkit-log4j-2.x</artifactId>
+                <version>${skywalking.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.skywalking</groupId>
+                <artifactId>apm-toolkit-trace</artifactId>
+                <version>${skywalking.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
