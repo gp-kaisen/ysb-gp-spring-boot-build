@@ -1,7 +1,6 @@
 package com.ysb.gp.logger;
 
 import com.ysb.logger.UserOpLog;
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,6 +37,7 @@ public class Slf4jCompositeLogProcessor extends CompositeLogProcessor {
 
     @Async("logAsync")
     @Override
+    @SuppressWarnings("rawtypes")
     public void process(UserOpLog<JsonResultLogOps> userOpLog) {
         try {
             if (operationLog.isInfoEnabled()) {
@@ -55,6 +55,7 @@ public class Slf4jCompositeLogProcessor extends CompositeLogProcessor {
      * @return {@link UserOpLogJsonModel}
      * @throws JsonProcessingException
      */
+    @SuppressWarnings("rawtypes")
     private UserOpLogJsonModel convert(UserOpLog<JsonResultLogOps> userOpLog) throws JsonProcessingException {
         UserOpLogJsonModel result = new UserOpLogJsonModel();
         result.setUserId(userOpLog.getuId());
