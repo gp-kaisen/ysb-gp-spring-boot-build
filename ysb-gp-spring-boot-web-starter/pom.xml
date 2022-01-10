@@ -28,6 +28,10 @@
         </dependency>
         <dependency>
             <groupId>com.ysb.gp</groupId>
+            <artifactId>ysb-gp-spring-boot-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.ysb.gp</groupId>
             <artifactId>ysb-gp-spring-boot-logger-starter</artifactId>
         </dependency>
         <dependency>

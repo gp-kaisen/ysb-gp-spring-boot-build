@@ -21,7 +21,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!--项目版本号-->
-        <revision>2.3.5-SNAPSHOT</revision>
+        <revision>2.3.6-SNAPSHOT</revision>
 
         <!-- 第三方依赖项版本 -->
         <ysb-spring-boot.version>2.3.5</ysb-spring-boot.version>
@@ -32,6 +32,7 @@
     </properties>
 
     <modules>
+        <module>ysb-gp-spring-boot-common</module>
         <module>ysb-gp-spring-boot-xxl-job-starter</module>
         <module>ysb-gp-spring-boot-logger-starter</module>
         <module>ysb-gp-spring-boot-web-starter</module>
@@ -40,6 +41,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.ysb.gp</groupId>
+                <artifactId>ysb-gp-spring-boot-common</artifactId>
+                <version>${revision}</version>
+            </dependency>
             <dependency>
                 <groupId>com.ysb.gp</groupId>
                 <artifactId>ysb-gp-spring-boot-logger-starter</artifactId>
@@ -143,6 +149,71 @@
                             <goals>
                                 <goal>jar</goal>
                             </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.basepom.maven</groupId>
+                    <artifactId>duplicate-finder-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>duplicate-dependencies</id>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                            <configuration>
+                                <failBuildInCaseOfConflict>true</failBuildInCaseOfConflict>
+                                <ignoredClassPatterns>
+                                    <ignoredClassPattern>.*module-info</ignoredClassPattern>
+                                </ignoredClassPatterns>
+                                <ignoredResourcePatterns>
+                                    <ignoredResourcePattern>changelog.txt</ignoredResourcePattern>
+                                    <ignoredResourcePattern>git.properties</ignoredResourcePattern>
+                                    <ignoredResourcePattern>about.html</ignoredResourcePattern>
+                                    <ignoredResourcePattern>.gitkeep</ignoredResourcePattern>
+                                </ignoredResourcePatterns>
+                                <ignoredDependencies>
+                                    <dependency>
+                                        <groupId>org.springframework.boot</groupId>
+                                        <artifactId>spring-boot-starter-test</artifactId>
+                                    </dependency>
+                                    <dependency>
+                                        <groupId>org.springframework.security</groupId>
+                                        <artifactId>spring-security-core</artifactId>
+                                    </dependency>
+                                </ignoredDependencies>
+                                <exceptions>
+                                    <exception>
+                                        <conflictingDependencies>
+                                            <dependency>
+                                                <groupId>org.springframework</groupId>
+                                                <artifactId>spring-aop</artifactId>
+                                            </dependency>
+                                            <dependency>
+                                                <groupId>aopalliance</groupId>
+                                                <artifactId>aopalliance</artifactId>
+                                            </dependency>
+                                            <dependency>
+                                                <groupId>org.springframework</groupId>
+                                                <artifactId>spring-jcl</artifactId>
+                                            </dependency>
+                                            <dependency>
+                                                <groupId>commons-logging</groupId>
+                                                <artifactId>commons-logging</artifactId>
+                                            </dependency>
+                                            <dependency>
+                                                <groupId>org.aspectj</groupId>
+                                                <artifactId>aspectjrt</artifactId>
+                                            </dependency>
+                                            <dependency>
+                                                <groupId>org.aspectj</groupId>
+                                                <artifactId>aspectjweaver</artifactId>
+                                            </dependency>
+                                        </conflictingDependencies>
+                                    </exception>
+                                </exceptions>
+                            </configuration>
                         </execution>
                     </executions>
                 </plugin>
