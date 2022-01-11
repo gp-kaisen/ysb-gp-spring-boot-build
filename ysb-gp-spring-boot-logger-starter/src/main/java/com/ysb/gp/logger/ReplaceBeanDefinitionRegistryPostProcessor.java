@@ -11,27 +11,28 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProce
  * 替换{@link com.ysb.logger.CompositeLogProcessor}为{@link Slf4jCompositeLogProcessor}
  */
 @Slf4j
-public class CompositeLogProcessorReplacedProcessor implements BeanDefinitionRegistryPostProcessor {
-    private static final String ORIGIN_BEAN_NAME = "compositeLogProcessor";
+public class ReplaceBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor {
 
+    private String originBeanName;
     private String replaceBeanName;
 
-    public CompositeLogProcessorReplacedProcessor(String replaceBeanName) {
+    public ReplaceBeanDefinitionRegistryPostProcessor(String originBeanName, String replaceBeanName) {
+        this.originBeanName = originBeanName;
         this.replaceBeanName = replaceBeanName;
     }
 
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
         try {
-            if (registry.containsBeanDefinition(ORIGIN_BEAN_NAME)
+            if (registry.containsBeanDefinition(originBeanName)
                     && registry.containsBeanDefinition(replaceBeanName)) {
                 BeanDefinition replaceBeanDefinition = registry.getBeanDefinition(replaceBeanName);
-                registry.removeBeanDefinition(ORIGIN_BEAN_NAME);
-                registry.registerBeanDefinition(ORIGIN_BEAN_NAME, replaceBeanDefinition);
-                log.debug("替换Bean %s 为 %s 成功", ORIGIN_BEAN_NAME, replaceBeanName);
+                registry.removeBeanDefinition(originBeanName);
+                registry.registerBeanDefinition(originBeanName, replaceBeanDefinition);
+                log.debug("替换Bean %s 为 %s 成功", originBeanName, replaceBeanName);
             }
         } catch (Exception e) {
-            log.error(String.format("替换Bean %s 为 %s 异常", ORIGIN_BEAN_NAME, replaceBeanName), e);
+            log.error(String.format("替换Bean %s 为 %s 异常", originBeanName, replaceBeanName), e);
         }
     }
 
