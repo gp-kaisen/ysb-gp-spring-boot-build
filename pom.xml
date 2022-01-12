@@ -38,6 +38,7 @@
         <module>ysb-gp-spring-boot-logger-starter</module>
         <module>ysb-gp-spring-boot-web-starter</module>
         <module>ysb-gp-spring-boot-skywalking-starter</module>
+        <module>ysb-gp-spring-boot-apollo-starter</module>
     </modules>
 
     <dependencyManagement>
