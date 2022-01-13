@@ -29,10 +29,10 @@ public class ReplaceBeanDefinitionRegistryPostProcessor implements BeanDefinitio
                 BeanDefinition replaceBeanDefinition = registry.getBeanDefinition(replaceBeanName);
                 registry.removeBeanDefinition(originBeanName);
                 registry.registerBeanDefinition(originBeanName, replaceBeanDefinition);
-                log.debug("替换Bean %s 为 %s 成功", originBeanName, replaceBeanName);
+                log.debug("替换Bean {} 为 {} 成功", originBeanName, replaceBeanName);
             }
         } catch (Exception e) {
-            log.error(String.format("替换Bean %s 为 %s 异常", originBeanName, replaceBeanName), e);
+            log.error("替换Bean {} 为 {} 异常", originBeanName, replaceBeanName, e);
         }
     }
 
