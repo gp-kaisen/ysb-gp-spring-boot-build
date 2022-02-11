@@ -1,8 +1,10 @@
 package com.ysb.gp.web.exception.handler;
 
 import com.ysb.gp.common.exception.BaseErrorCodeException;
+import com.ysb.gp.web.config.WebProperties;
 import com.ysb.web.common.result.JsonResult;
 import com.ysb.web.common.result.ReturnCode;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.validation.FieldError;
@@ -10,18 +12,20 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.Optional;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import java.util.Optional;
 
 /**
  * 全局异常处理器
  */
 @RestControllerAdvice
 @Slf4j
+@RequiredArgsConstructor
 public class DefaultExceptionHandler {
+
+    private final WebProperties webProperties;
 
     /**
      * 参数相关异常处理
@@ -81,9 +85,29 @@ public class DefaultExceptionHandler {
     @SuppressWarnings("rawtypes")
     public JsonResult exceptionHandler(Exception ex, HttpServletRequest request) {
 
-        log.error("SystemException: {}", request.getRequestURI(), ex);
+        if (shouldIgnore(ex)) {
+            log.warn("SystemException: {}", request.getRequestURI(), ex);
+            return JsonResult.build(ReturnCode.PARAM_ERROR.getCode(), "参数错误");
+        } else {
+            log.error("SystemException: {}", request.getRequestURI(), ex);
+            return JsonResult.build(ReturnCode.EXCEPTION.getCode(), "服务器开小差，请稍后再试");
+        }
 
-        return JsonResult.build(ReturnCode.EXCEPTION.getCode(), "服务器开小差，请稍后再试");
+    }
+
+    private boolean shouldIgnore(Exception exception) {
+        Class<? extends Exception> clazz = exception.getClass();
+        for (String ignoredExceptionName : webProperties.getIgnoreException()) {
+            try {
+                Class<?> parentClazz = Class.forName(ignoredExceptionName, true, clazz.getClassLoader());
+                if (parentClazz.isAssignableFrom(clazz)) {
+                    return true;
+                }
+            } catch (ClassNotFoundException e) {
+                log.error("ysb.gp.web.ignoreException config error! class not found: {}", e.getMessage(), e);
+            }
+        }
+        return false;
     }
 
 }
