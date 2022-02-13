@@ -147,16 +147,16 @@
             </build>
 
             <distributionManagement>
-                <snapshotRepository>
-                    <id>sonatype-nexus-snapshots</id>
-                    <name>Sonatype Nexus Snapshots</name>
-                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-                </snapshotRepository>
                 <repository>
-                    <id>sonatype-nexus-staging</id>
-                    <name>Nexus Release Repository</name>
-                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                    <id>nexus</id>
+                    <name>Releases</name>
+                    <url>http://nexus.guangpuyun.cn/repository/maven-releases</url>
                 </repository>
+                <snapshotRepository>
+                    <id>nexus</id>
+                    <name>Snapshots</name>
+                    <url>http://nexus.guangpuyun.cn/repository/maven-snapshots</url>
+                </snapshotRepository>
             </distributionManagement>
         </profile>
 
