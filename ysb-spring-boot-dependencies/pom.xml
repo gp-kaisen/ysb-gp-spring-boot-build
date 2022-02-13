@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.ysb.gp</groupId>
+        <artifactId>ysb-gp-spring-boot-build</artifactId>
+        <version>${revision}</version>
+        <relativePath>../</relativePath>
+    </parent>
 
     <groupId>com.ysb.gp</groupId>
     <artifactId>ysb-spring-boot-dependencies</artifactId>
-    <version>${revision}</version>
     <packaging>pom</packaging>
     <name>Ysb Spring Boot Dependencies</name>
     <description>Ysb Spring Boot Dependencies</description>
 
     <properties>
-        <revision>2.3.5</revision>
+        <ysb.version>2.3.5</ysb.version>
 
         <brave.version>5.13.2</brave.version>
         <disruptor.version>3.4.4</disruptor.version>
@@ -29,22 +34,22 @@
             <dependency>
                 <groupId>com.ysb</groupId>
                 <artifactId>ysb-spring-boot-cache-starter</artifactId>
-                <version>${revision}</version>
+                <version>${ysb.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.ysb</groupId>
                 <artifactId>ysb-spring-boot-logger-starter</artifactId>
-                <version>${revision}</version>
+                <version>${ysb.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.ysb</groupId>
                 <artifactId>ysb-spring-boot-web-starter</artifactId>
-                <version>${revision}</version>
+                <version>${ysb.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.ysb</groupId>
                 <artifactId>ysb-spring-boot-email-starter</artifactId>
-                <version>${revision}</version>
+                <version>${ysb.version}</version>
             </dependency>
 
 
@@ -72,93 +77,75 @@
         </dependencies>
     </dependencyManagement>
 
-    <profiles>
-        <profile>
-            <id>release</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <version>${maven-source-plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>jar-no-fork</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>${maven-javadoc-plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
 
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>${maven-gpg-plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven-source-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>flatten-maven-plugin</artifactId>
-                        <version>${flatten-maven-plugin.version}</version>
-                        <configuration>
-                            <updatePomFile>true</updatePomFile>
-                            <flattenMode>resolveCiFriendliesOnly</flattenMode>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>flatten</id>
-                                <phase>process-resources</phase>
-                                <goals>
-                                    <goal>flatten</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>flatten.clean</id>
-                                <phase>clean</phase>
-                                <goals>
-                                    <goal>clean</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>${flatten-maven-plugin.version}</version>
+                <configuration>
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
-            <distributionManagement>
-                <repository>
-                    <id>nexus</id>
-                    <name>Releases</name>
-                    <url>http://nexus.guangpuyun.cn/repository/maven-releases</url>
-                </repository>
-                <snapshotRepository>
-                    <id>nexus</id>
-                    <name>Snapshots</name>
-                    <url>http://nexus.guangpuyun.cn/repository/maven-snapshots</url>
-                </snapshotRepository>
-            </distributionManagement>
-        </profile>
+    <distributionManagement>
+        <repository>
+            <id>nexus</id>
+            <name>Releases</name>
+            <url>http://nexus.guangpuyun.cn/repository/maven-releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus</id>
+            <name>Snapshots</name>
+            <url>http://nexus.guangpuyun.cn/repository/maven-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
-    </profiles>
 </project>
