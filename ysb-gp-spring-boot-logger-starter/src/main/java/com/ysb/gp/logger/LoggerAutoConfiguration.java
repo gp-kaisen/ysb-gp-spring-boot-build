@@ -2,7 +2,6 @@ package com.ysb.gp.logger;
 
 import com.ysb.logger.CompositeLogProcessor;
 
-import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnProperty(name = "ysb.gp.logger.enabled", havingValue = "true", matchIfMissing = true)
-@ImportAutoConfiguration(CompositeMsLogProcessorConfiguration.class)
 public class LoggerAutoConfiguration {
     public static final String SLF4J_COMPOSITE_LOG_PROCESSOR_BEAN_NAME = "slf4jCompositeLogProcessor";
 
