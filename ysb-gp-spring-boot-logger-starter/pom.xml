@@ -16,6 +16,10 @@
             <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.ysb.gp</groupId>
+            <artifactId>ysb-gp-spring-boot-log4j2-starter</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.ysb</groupId>
             <artifactId>ysb-spring-boot-logger-starter</artifactId>
             <exclusions>
@@ -23,7 +27,15 @@
                     <groupId>org.springframework.cloud</groupId>
                     <artifactId>spring-cloud-starter-sleuth</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-log4j2</artifactId>
+                </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.ysb.gp</groupId>
+            <artifactId>ysb-gp-log4j2</artifactId>
         </dependency>
         <!-- ysb-spring-boot-logger-starter 存在依赖，暂时无法移除-->
         <dependency>
@@ -45,6 +57,5 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 </project>
