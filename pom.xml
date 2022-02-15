@@ -33,6 +33,7 @@
         <skywalking.version>8.7.0</skywalking.version>
         <apollo.version>1.9.2</apollo.version>
         <ysb-gp-log4j2.version>1.0.0-SNAPSHOT</ysb-gp-log4j2.version>
+        <mybatis-plus.version>3.5.1</mybatis-plus.version>
 
         <!-- Maven Plugin Versions -->
         <flatten-maven-plugin.version>1.1.0</flatten-maven-plugin.version>
@@ -48,6 +49,7 @@
         <module>ysb-gp-spring-boot-web-starter</module>
         <module>ysb-gp-spring-boot-skywalking-starter</module>
         <module>ysb-gp-spring-boot-apollo-starter</module>
+        <module>ysb-gp-spring-boot-dao-starter</module>
     </modules>
 
     <dependencyManagement>
@@ -156,6 +158,11 @@
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-jul</artifactId>
                 <version>${log4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus</artifactId>
+                <version>${mybatis-plus.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
