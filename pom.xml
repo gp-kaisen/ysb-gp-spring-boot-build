@@ -11,7 +11,6 @@
     <groupId>com.ysb.gp</groupId>
     <artifactId>ysb-gp-spring-boot-build</artifactId>
     <version>${revision}</version>
-    <!-- <version>1.0.0-SNAPSHOT</version> -->
     <packaging>pom</packaging>
 
     <name>${project.artifactId}</name>
@@ -20,11 +19,13 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+        <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
+
         <!--项目版本号-->
         <revision>2.3.7-SNAPSHOT</revision>
 
         <!-- ysb相关依赖项版本-->
-        <ysb.version>2.3.5</ysb.version>
+        <ysb-dependencies.version>2.3.5-SNAPSHOT</ysb-dependencies.version>
 
         <!-- 第三方依赖项版本 -->
         <xxl-job-core.version>2.3.0</xxl-job-core.version>
@@ -56,7 +57,7 @@
             <dependency>
                 <groupId>com.ysb.gp</groupId>
                 <artifactId>ysb-spring-boot-dependencies</artifactId>
-                <version>${ysb.version}</version>
+                <version>${ysb-dependencies.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -174,100 +175,6 @@
                             <pluginExecutions>
                                 <pluginExecution>
                                     <pluginExecutionFilter>
-                                        <groupId>org.apache.maven.plugins</groupId>
-                                        <artifactId>maven-checkstyle-plugin</artifactId>
-                                        <versionRange>[1,)</versionRange>
-                                        <goals>
-                                            <goal>check</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore />
-                                    </action>
-                                </pluginExecution>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>org.apache.maven.plugins</groupId>
-                                        <artifactId>maven-dependency-plugin</artifactId>
-                                        <versionRange>[1,)</versionRange>
-                                        <goals>
-                                            <goal>copy</goal>
-                                            <goal>copy-dependencies</goal>
-                                            <goal>unpack</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore />
-                                    </action>
-                                </pluginExecution>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>org.apache.maven.plugins</groupId>
-                                        <artifactId>maven-enforcer-plugin</artifactId>
-                                        <versionRange>[1,)</versionRange>
-                                        <goals>
-                                            <goal>enforce</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore />
-                                    </action>
-                                </pluginExecution>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>org.apache.maven.plugins</groupId>
-                                        <artifactId>maven-invoker-plugin</artifactId>
-                                        <versionRange>[1,)</versionRange>
-                                        <goals>
-                                            <goal>install</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore />
-                                    </action>
-                                </pluginExecution>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>org.apache.maven.plugins</groupId>
-                                        <artifactId>maven-plugin-plugin</artifactId>
-                                        <versionRange>[1,)</versionRange>
-                                        <goals>
-                                            <goal>descriptor</goal>
-                                            <goal>helpmojo</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore />
-                                    </action>
-                                </pluginExecution>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>org.basepom.maven</groupId>
-                                        <artifactId>duplicate-finder-maven-plugin</artifactId>
-                                        <versionRange>[1,)</versionRange>
-                                        <goals>
-                                            <goal>check</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore />
-                                    </action>
-                                </pluginExecution>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>org.codehaus.mojo</groupId>
-                                        <artifactId>build-helper-maven-plugin</artifactId>
-                                        <versionRange>[1,)</versionRange>
-                                        <goals>
-                                            <goal>reserve-network-port</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore />
-                                    </action>
-                                </pluginExecution>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
                                         <groupId>org.codehaus.mojo</groupId>
                                         <artifactId>flatten-maven-plugin</artifactId>
                                         <versionRange>[1,)</versionRange>
@@ -279,67 +186,9 @@
                                         <ignore />
                                     </action>
                                 </pluginExecution>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>org.jetbrains.kotlin</groupId>
-                                        <artifactId>kotlin-maven-plugin</artifactId>
-                                        <versionRange>[1,)</versionRange>
-                                        <goals>
-                                            <goal>compile</goal>
-                                            <goal>test-compile</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore />
-                                    </action>
-                                </pluginExecution>
-                                <!-- <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>org.jooq</groupId>
-                                        <artifactId>jooq-codegen-maven</artifactId>
-                                        <versionRange>[1,)</versionRange>
-                                        <goals>
-                                            <goal>generate</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore />
-                                    </action>
-                                </pluginExecution> -->
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>org.springframework.boot</groupId>
-                                        <artifactId>spring-boot-maven-plugin</artifactId>
-                                        <versionRange>[1,)</versionRange>
-                                        <goals>
-                                            <goal>build-info</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore />
-                                    </action>
-                                </pluginExecution>
                             </pluginExecutions>
                         </lifecycleMappingMetadata>
                     </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-source-plugin</artifactId>
-                    <!-- <configuration>
-                    <forceCreation>true</forceCreation>
-                </configuration> -->
-                    <configuration>
-                        <attach>true</attach>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <phase>compile</phase>
-                            <goals>
-                                <goal>jar</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.basepom.maven</groupId>
@@ -461,7 +310,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <!--<version>3.6.1</version>-->
                 <configuration>
                     <compilerArgs>
                         <arg>-Xlint:unchecked</arg>
@@ -476,7 +324,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <!--<version>3.2.1</version>-->
                 <executions>
                     <execution>
                         <id>attach-sources</id>

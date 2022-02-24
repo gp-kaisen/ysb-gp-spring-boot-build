@@ -12,6 +12,8 @@
     <packaging>pom</packaging>
 
     <properties>
+        <ysb.version>2.3.5</ysb.version>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -96,9 +98,9 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <!-- exclude掉spring-boot的默认log配置 -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter</artifactId>
+                <version>${spring-boot.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.springframework.boot</groupId>
