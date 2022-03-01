@@ -29,6 +29,10 @@ public class BaseLogField implements Serializable {
      */
     private String userId;
     /**
+     * 用户类型
+     */
+    private String userType;
+    /**
      * 诊所id
      */
     private String clinicId;
