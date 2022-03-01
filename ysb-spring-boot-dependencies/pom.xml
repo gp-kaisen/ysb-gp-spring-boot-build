@@ -2,14 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.ysb.gp</groupId>
-        <artifactId>ysb-gp-spring-boot-build</artifactId>
-        <version>${revision}</version>
-        <relativePath>../</relativePath>
+        <groupId>com.ysb</groupId>
+        <artifactId>ysb-spring-boot</artifactId>
+        <version>2.3.5</version>
+        <relativePath />
     </parent>
 
     <groupId>com.ysb.gp</groupId>
     <artifactId>ysb-spring-boot-dependencies</artifactId>
+    <version>2.3.5-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Ysb Spring Boot Dependencies</name>
     <description>Ysb Spring Boot Dependencies</description>
