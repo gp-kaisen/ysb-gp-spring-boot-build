@@ -3,15 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.ysb</groupId>
-        <artifactId>ysb-spring-boot</artifactId>
-        <version>2.3.5</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.12.RELEASE</version>
     </parent>
 
     <groupId>com.ysb.gp</groupId>
-    <artifactId>ysb-gp-spring-boot</artifactId>
+    <artifactId>ysb-gp-spring-boot-build</artifactId>
     <version>${revision}</version>
-    <!-- <version>1.0.0-SNAPSHOT</version> -->
     <packaging>pom</packaging>
 
     <name>${project.artifactId}</name>
@@ -20,23 +19,144 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+        <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
+
         <!--项目版本号-->
-        <revision>2.3.5-SNAPSHOT</revision>
+        <revision>2.3.7</revision>
+
+        <!-- ysb相关依赖项版本-->
+        <ysb-dependencies.version>2.3.5-SNAPSHOT</ysb-dependencies.version>
 
         <!-- 第三方依赖项版本 -->
         <xxl-job-core.version>2.3.0</xxl-job-core.version>
+        <log4j.version>2.17.1</log4j.version>
+        <log4j-layout-template-json.version>2.17.1</log4j-layout-template-json.version>
+        <skywalking.version>8.7.0</skywalking.version>
+        <apollo.version>1.9.2</apollo.version>
+        <ysb-gp-log4j2.version>1.0.0-SNAPSHOT</ysb-gp-log4j2.version>
+
+        <!-- Maven Plugin Versions -->
+        <flatten-maven-plugin.version>1.1.0</flatten-maven-plugin.version>
     </properties>
 
     <modules>
+        <module>ysb-spring-boot-dependencies</module>
+        <module>ysb-gp-spring-boot-common</module>
+        <module>ysb-gp-spring-boot-web-parent</module>
         <module>ysb-gp-spring-boot-xxl-job-starter</module>
+        <module>ysb-gp-spring-boot-log4j2-starter</module>
+        <module>ysb-gp-spring-boot-logger-starter</module>
+        <module>ysb-gp-spring-boot-web-starter</module>
+        <module>ysb-gp-spring-boot-skywalking-starter</module>
+        <module>ysb-gp-spring-boot-apollo-starter</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+            <!-- ysb相关依赖 -->
+            <dependency>
+                <groupId>com.ysb.gp</groupId>
+                <artifactId>ysb-spring-boot-dependencies</artifactId>
+                <version>${ysb-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ysb.gp</groupId>
+                <artifactId>ysb-gp-spring-boot-common</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ysb.gp</groupId>
+                <artifactId>ysb-gp-spring-boot-logger-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ysb.gp</groupId>
+                <artifactId>ysb-gp-spring-boot-xxl-job-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ysb.gp</groupId>
+                <artifactId>ysb-gp-spring-boot-web-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ysb.gp</groupId>
+                <artifactId>ysb-gp-spring-boot-skywalking-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ysb.gp</groupId>
+                <artifactId>ysb-gp-spring-boot-log4j2-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ysb.gp</groupId>
+                <artifactId>ysb-gp-spring-boot-apollo-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <!-- 第三方依赖-->
+            <dependency>
+                <groupId>com.ysb.gp</groupId>
+                <artifactId>ysb-gp-log4j2</artifactId>
+                <version>${ysb-gp-log4j2.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.xuxueli</groupId>
                 <artifactId>xxl-job-core</artifactId>
                 <version>${xxl-job-core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-layout-template-json</artifactId>
+                <version>${log4j-layout-template-json.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.skywalking</groupId>
+                <artifactId>apm-toolkit-log4j-2.x</artifactId>
+                <version>${skywalking.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.skywalking</groupId>
+                <artifactId>apm-toolkit-trace</artifactId>
+                <version>${skywalking.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ctrip.framework.apollo</groupId>
+                <artifactId>apollo-client</artifactId>
+                <version>${apollo.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-jcl</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-jul</artifactId>
+                <version>${log4j.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -44,46 +164,94 @@
     <build>
         <pluginManagement>
             <plugins>
+                <!-- This plugin's configuration is used to store Eclipse m2e settings
+					 only. It has no influence on the Maven build itself. -->
                 <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>flatten-maven-plugin</artifactId>
-                    <!-- <version>${flatten-maven-plugin.version}</version> -->
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
                     <configuration>
-                        <updatePomFile>true</updatePomFile>
-                        <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.codehaus.mojo</groupId>
+                                        <artifactId>flatten-maven-plugin</artifactId>
+                                        <versionRange>[1,)</versionRange>
+                                        <goals>
+                                            <goal>flatten</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore />
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
                     </configuration>
-                    <executions>
-                        <execution>
-                            <id>flatten</id>
-                            <phase>process-resources</phase>
-                            <goals>
-                                <goal>flatten</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>flatten.clean</id>
-                            <phase>clean</phase>
-                            <goals>
-                                <goal>clean</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-source-plugin</artifactId>
-                    <!-- <configuration>
-                    <forceCreation>true</forceCreation>
-                </configuration> -->
-                    <configuration>
-                        <attach>true</attach>
-                    </configuration>
+                    <groupId>org.basepom.maven</groupId>
+                    <artifactId>duplicate-finder-maven-plugin</artifactId>
                     <executions>
                         <execution>
-                            <phase>compile</phase>
+                            <id>duplicate-dependencies</id>
+                            <phase>validate</phase>
                             <goals>
-                                <goal>jar</goal>
+                                <goal>check</goal>
                             </goals>
+                            <configuration>
+                                <failBuildInCaseOfConflict>true</failBuildInCaseOfConflict>
+                                <ignoredClassPatterns>
+                                    <ignoredClassPattern>.*module-info</ignoredClassPattern>
+                                </ignoredClassPatterns>
+                                <ignoredResourcePatterns>
+                                    <ignoredResourcePattern>changelog.txt</ignoredResourcePattern>
+                                    <ignoredResourcePattern>git.properties</ignoredResourcePattern>
+                                    <ignoredResourcePattern>about.html</ignoredResourcePattern>
+                                    <ignoredResourcePattern>.gitkeep</ignoredResourcePattern>
+                                </ignoredResourcePatterns>
+                                <ignoredDependencies>
+                                    <dependency>
+                                        <groupId>org.springframework.boot</groupId>
+                                        <artifactId>spring-boot-starter-test</artifactId>
+                                    </dependency>
+                                    <dependency>
+                                        <groupId>org.springframework.security</groupId>
+                                        <artifactId>spring-security-core</artifactId>
+                                    </dependency>
+                                </ignoredDependencies>
+                                <exceptions>
+                                    <exception>
+                                        <conflictingDependencies>
+                                            <dependency>
+                                                <groupId>org.springframework</groupId>
+                                                <artifactId>spring-aop</artifactId>
+                                            </dependency>
+                                            <dependency>
+                                                <groupId>aopalliance</groupId>
+                                                <artifactId>aopalliance</artifactId>
+                                            </dependency>
+                                            <dependency>
+                                                <groupId>org.springframework</groupId>
+                                                <artifactId>spring-jcl</artifactId>
+                                            </dependency>
+                                            <dependency>
+                                                <groupId>commons-logging</groupId>
+                                                <artifactId>commons-logging</artifactId>
+                                            </dependency>
+                                            <dependency>
+                                                <groupId>org.aspectj</groupId>
+                                                <artifactId>aspectjrt</artifactId>
+                                            </dependency>
+                                            <dependency>
+                                                <groupId>org.aspectj</groupId>
+                                                <artifactId>aspectjweaver</artifactId>
+                                            </dependency>
+                                        </conflictingDependencies>
+                                    </exception>
+                                </exceptions>
+                            </configuration>
                         </execution>
                     </executions>
                 </plugin>
@@ -117,11 +285,31 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
+                <version>${flatten-maven-plugin.version}</version>
+                <configuration>
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <!--<version>3.6.1</version>-->
                 <configuration>
                     <compilerArgs>
                         <arg>-Xlint:unchecked</arg>
@@ -136,7 +324,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <!--<version>3.2.1</version>-->
                 <executions>
                     <execution>
                         <id>attach-sources</id>

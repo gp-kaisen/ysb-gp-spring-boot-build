@@ -9,7 +9,7 @@ import lombok.Data;
  * Xxl Job 配置
  */
 @Data
-@ConfigurationProperties(prefix = "xxl.job")
+@ConfigurationProperties(prefix = "xxl.job.executor")
 public class XxlJobProperties {
 
     @Value("${xxl.job.admin.addresses}")

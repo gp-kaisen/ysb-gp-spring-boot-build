@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.ysb.gp</groupId>
+        <artifactId>ysb-gp-spring-boot-build</artifactId>
+        <version>${revision}</version>
+        <relativePath>../</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>ysb-gp-spring-boot-web-parent</artifactId>
+    <packaging>pom</packaging>
+
+    <properties>
+        <ysb.version>2.3.5</ysb.version>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+
+        <mysql.version>5.1.48</mysql.version> <!-- mysql connector 版本，兼容现有的mycat版本 -->
+    </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- async logger -->
+        <dependency>
+            <groupId>com.lmax</groupId>
+            <artifactId>disruptor</artifactId>
+        </dependency>
+
+        <!-- 敏感配置加密 -->
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot-starter</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName> <!-- 指定package生成的文件名 -->
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <!--<version>3.6.1</version>-->
+                <configuration>
+                    <compilerArgs>
+                        <arg>-Xlint:unchecked</arg>
+                        <arg>-Xlint:deprecation</arg>
+                    </compilerArgs>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <!--<configuration>
+                    &lt;!&ndash; 可以使用项目目录中的jar文件 &ndash;&gt;
+                    <includeSystemScope>true</includeSystemScope>
+                </configuration>-->
+                <executions>
+                    <!-- 输出build信息到info endpoint -->
+                    <execution>
+                        <goals>
+                            <goal>build-info</goal>
+                        </goals>
+                        <configuration>
+                            <additionalProperties>
+                                <java.source>${maven.compiler.source}</java.source>
+                                <java.target>${maven.compiler.target}</java.target>
+                                <app.description>${project.description}</app.description>
+                                <app.parent.name>${project.parent.artifactId}</app.parent.name>
+                                <app.parent.version>${project.parent.version}</app.parent.version>
+                            </additionalProperties>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- version, scope, exclusions 都可以被继承-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring-boot.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.ysb</groupId>
+                <artifactId>ysb-spring-boot-web-starter</artifactId>
+                <version>${ysb.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.ysb</groupId>
+                <artifactId>ysb-spring-boot-sms-client-starter</artifactId>
+                <version>${ysb.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ysb</groupId>
+                <artifactId>ysb-spring-boot-im-client-starter</artifactId>
+                <version>${ysb.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ysb</groupId>
+                <artifactId>ysb-spring-boot-wechat-client-starter</artifactId>
+                <version>${ysb.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ysb</groupId>
+                <artifactId>ysb-spring-boot-service-client-starter</artifactId>
+                <version>${ysb.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ysb</groupId>
+                <artifactId>ysb-spring-boot-admin-client-starter</artifactId>
+                <version>${ysb.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ysb</groupId>
+                <artifactId>ysb-spring-boot-bdm-starter</artifactId>
+                <version>${ysb.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ysb</groupId>
+                <artifactId>ysb-spring-boot-ti-router-starter</artifactId>
+                <version>${ysb.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
